@@ -1,4 +1,4 @@
-{% set version = "1.9.1" %}
+{% set version = "1.10.3" %}
 
 package:
     name: healpy
