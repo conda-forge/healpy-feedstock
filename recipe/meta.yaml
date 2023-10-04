@@ -19,7 +19,7 @@ build:
 
 requirements:
   build:
-    - python >=3.9                           # [build_platform != target_platform]
+    - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - cython                                 # [build_platform != target_platform]
     - numpy                                  # [build_platform != target_platform]
@@ -34,7 +34,7 @@ requirements:
   host:
     - cfitsio
     - cython
-    - python >=3.9
+    - python
     - setuptools
     - numpy
     - pip
@@ -42,7 +42,7 @@ requirements:
     - six
     - zlib
   run:
-    - python >=3.9
+    - python
     - matplotlib-base
     - {{ pin_compatible('numpy') }}
     - six
