@@ -40,13 +40,11 @@ requirements:
     - numpy
     - pip
     - pytest-runner
-    - six
     - zlib
   run:
     - python
     - matplotlib-base
     - {{ pin_compatible('numpy') }}
-    - six
     - astropy
     - scipy
     - pytest-runner
