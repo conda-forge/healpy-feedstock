@@ -36,6 +36,7 @@ requirements:
     - cython
     - python
     - setuptools
+    - setuptools-scm
     - numpy
     - pip
     - pytest-runner
