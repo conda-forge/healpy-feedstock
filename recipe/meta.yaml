@@ -14,7 +14,7 @@ source:
     - cross-rpath-flag-workaround.patch  # [aarch64]
 
 build:
-  number: 4
+  number: 5
   skip: true  # [win or py<39]
 
 requirements:
@@ -30,6 +30,7 @@ requirements:
     - make  # [unix]
     - {{ compiler('fortran') }}
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
   host:
     - cfitsio
@@ -44,7 +45,6 @@ requirements:
   run:
     - python
     - matplotlib-base
-    - {{ pin_compatible('numpy') }}
     - astropy
     - scipy
     - pytest-runner
