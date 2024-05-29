@@ -1,8 +1,8 @@
 #! /bin/bash
 # Get an updated config.sub and config.guess
-cp $BUILD_PREFIX/share/libtool/build-aux/config.* ./healpixsubmodule/src/cxx
-cp $BUILD_PREFIX/share/libtool/build-aux/config.* ./cfitsio
-cp $BUILD_PREFIX/share/libtool/build-aux/config.* ./healpixsubmodule/src/common_libraries/libsharp
+cp $BUILD_PREFIX/share/libtool/build-aux/config.* ./cextern/healpix/src/cxx
+cp $BUILD_PREFIX/share/libtool/build-aux/config.* ./cextern/cfitsio
+cp $BUILD_PREFIX/share/libtool/build-aux/config.* ./cextern/healpix/src/common_libraries/libsharp
 
 set -ex
 
