@@ -1,7 +1,7 @@
 #! /bin/bash
 set -ex
 
-for subdir in ./cextern/cfitsio ./cextern/healpix/src/common_libraries/libsharp ./cextern/healpix/src/cxx; do
+for subdir in ./cextern/healpix/src/common_libraries/libsharp ./cextern/healpix/src/cxx; do
     pushd $subdir
     # Get an updated config.sub and config.guess
     cp $BUILD_PREFIX/share/libtool/build-aux/config.* ./
