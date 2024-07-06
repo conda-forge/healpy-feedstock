@@ -5,7 +5,7 @@ for subdir in ./cextern/healpix/src/common_libraries/libsharp ./cextern/healpix/
     pushd $subdir
     # Get an updated config.sub and config.guess
     cp $BUILD_PREFIX/share/libtool/build-aux/config.* ./
-    ./configure
+    ./configure --prefix="${PREFIX}"
     make install
     popd
 done
