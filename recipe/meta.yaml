@@ -54,7 +54,6 @@ test:
     - healpy
   requires:
     - pytest
-    - pytest-astropy-header
     - pytest-cython
     - pytest-doctestplus
     - requests
