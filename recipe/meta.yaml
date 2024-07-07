@@ -40,14 +40,12 @@ requirements:
     - setuptools-scm
     - numpy
     - pip
-    - pytest-runner
     - zlib
   run:
     - python
     - matplotlib-base
     - astropy
     - scipy
-    - pytest-runner
 
 test:
   imports:
