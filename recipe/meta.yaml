@@ -52,7 +52,6 @@ test:
     - healpy
   requires:
     - pytest
-    - nose
 
 about:
   home: http://github.com/healpy
