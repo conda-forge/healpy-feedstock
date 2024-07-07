@@ -58,7 +58,7 @@ test:
     - requests
   commands:
     - pytest --doctest-plus --doctest-cython --pyargs healpy
-    - pytest test
+    - pytest {{ SRC_DIR }}/test
 
 about:
   home: http://github.com/healpy
