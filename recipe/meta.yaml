@@ -50,7 +50,6 @@ requirements:
 test:
   imports:
     - healpy
-    - healpy.test
   requires:
     - pytest
     - nose
