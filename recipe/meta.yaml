@@ -48,6 +48,8 @@ requirements:
     - scipy
 
 test:
+  source_files:
+    - test
   imports:
     - healpy
   requires:
@@ -58,7 +60,7 @@ test:
     - requests
   commands:
     - pytest --doctest-plus --doctest-cython --pyargs healpy
-    - pytest {{ SRC_DIR }}/test
+    - pytest test
 
 about:
   home: http://github.com/healpy
