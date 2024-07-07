@@ -45,7 +45,7 @@ requirements:
     - python
     - matplotlib-base
     - astropy
-    - scipy
+    - scipy <1.14.0
 
 test:
   source_files:
