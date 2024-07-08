@@ -1,6 +1,6 @@
 {% set name = "healpy" %}
-{% set version = "1.16.6" %}
-{% set sha256 = "0ab26e828fcd251a141095af6d9bf3dba43cec6f0f5cd48b65bf0af8f56329f1" %}
+{% set version = "1.17.1" %}
+{% set sha256 = "6469fc9669e4cc6068c1509ba67228f215db57b3c2d6f00bd1eb481d97732e88" %}
 
 package:
   name: {{ name|lower }}
@@ -14,7 +14,7 @@ source:
     - cross-rpath-flag-workaround.patch  # [aarch64]
 
 build:
-  number: 6
+  number: 0
   skip: true  # [win or py<39]
 
 requirements:
@@ -40,22 +40,26 @@ requirements:
     - setuptools-scm
     - numpy
     - pip
-    - pytest-runner
     - zlib
   run:
     - python
     - matplotlib-base
     - astropy
-    - scipy
-    - pytest-runner
+    - scipy <1.14.0
 
 test:
+  source_files:
+    - test
   imports:
     - healpy
-    - healpy.test
   requires:
     - pytest
-    - nose
+    - pytest-cython
+    - pytest-doctestplus
+    - requests
+  commands:
+    - pytest --doctest-plus --doctest-cython --pyargs healpy
+    - pytest test
 
 about:
   home: http://github.com/healpy
