@@ -14,7 +14,7 @@ source:
     - cross-rpath-flag-workaround.patch  # [aarch64]
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win or py<310]
 
 requirements:
@@ -44,7 +44,7 @@ requirements:
   run:
     - python
     - matplotlib-base
-    - astropy
+    - astropy-base
     - scipy
 
 test:
