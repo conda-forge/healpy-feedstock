@@ -7,14 +7,14 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
   patches:
     - macos-c++-linking.patch    # [osx]
     - cross-rpath-flag-workaround.patch  # [aarch64]
 
 build:
-  number: 1
+  number: 2
   skip: true  # [win or py<310]
 
 requirements:
