@@ -1,6 +1,6 @@
 {% set name = "healpy" %}
-{% set version = "1.18.1" %}
-{% set sha256 = "ce59ebf3266fb32225e3f7531c3ca40b41d31954ca7b930a6766cc027ed7ebec" %}
+{% set version = "1.19.0" %}
+{% set sha256 = "28e839cb885a23d36c77fc3423a3cb9271a07fda94085bd12fc329f941130ec5" %}
 
 package:
   name: {{ name|lower }}
@@ -14,7 +14,7 @@ source:
     - cross-rpath-flag-workaround.patch  # [aarch64]
 
 build:
-  number: 3
+  number: 0
   skip: true  # [win or py<310]
 
 requirements:
