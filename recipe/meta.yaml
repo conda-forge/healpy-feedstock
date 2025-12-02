@@ -50,6 +50,7 @@ requirements:
 test:
   source_files:
     - test
+    - setup.py
   imports:
     - healpy
   requires:
