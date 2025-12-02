@@ -54,6 +54,7 @@ test:
   imports:
     - healpy
   requires:
+    - cython
     - pytest
     - pytest-cython
     - pytest-doctestplus
