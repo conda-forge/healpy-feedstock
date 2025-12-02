@@ -61,7 +61,9 @@ test:
     - requests
   commands:
     - pytest --doctest-plus --doctest-cython --pyargs healpy
-    - pytest test
+    # Use an expanded file list to avoid passing literal "test" in sys.argv, which
+    # triggers setup.py's guard that aborts when it sees "test" in argv.
+    - pytest test/*.py
 
 about:
   home: http://github.com/healpy
