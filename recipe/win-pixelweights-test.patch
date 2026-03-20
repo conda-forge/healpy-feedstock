@@ -1,0 +1,21 @@
+diff --git a/test/test_pixelweights.py b/test/test_pixelweights.py
+index 7941e70..7679f4f 100644
+--- a/test/test_pixelweights.py
++++ b/test/test_pixelweights.py
+@@ -58,10 +58,13 @@ def test_pixelweights_local_datapath(tmp_path, create_reference_alm):
+     datapath = tmp_path / "datapath" / "full_weights"
+     datapath.mkdir(parents=True)
+     pixel_weights_file = requests.get(
+-        "https://github.com/healpy/healpy-data/"
+-        "blob/master/full_weights/"
+-        "healpix_full_weights_nside_0064.fits?raw=true"
++        "https://healpy.github.io/healpy-data/"
++        "full_weights/healpix_full_weights_nside_0064.fits",
++        timeout=30,
+     )
++    pixel_weights_file.raise_for_status()
++    if not pixel_weights_file.content.startswith(b"SIMPLE"):
++        raise AssertionError("Pixel weights download returned non-FITS content")
+     with open(datapath / "healpix_full_weights_nside_0064.fits", "wb") as f:
+         f.write(pixel_weights_file.content)
+ 

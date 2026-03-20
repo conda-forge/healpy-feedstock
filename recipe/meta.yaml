@@ -12,10 +12,13 @@ source:
   patches:
     - macos-c++-linking.patch    # [osx]
     - cross-rpath-flag-workaround.patch  # [aarch64]
+    - win-setup-pkgconfig.patch  # [win]
+    - win-pixel-lib-int64.patch  # [win]
+    - win-pixelweights-test.patch
 
 build:
-  number: 0
-  skip: true  # [win or py<310]
+  number: 1
+  skip: true  # [py<310]
 
 requirements:
   build:
@@ -25,10 +28,13 @@ requirements:
     - numpy                                  # [build_platform != target_platform]
     - pkg-config
     - openssl
-    - libopenssl-static
+    - libopenssl-static  # [unix]
     - libtool  # [unix]
     - make  # [unix]
-    - {{ compiler('fortran') }}
+    - autotools_clang_conda  # [win]
+    - compiler-rt  # [win]
+    - llvm-openmp  # [win]
+    - {{ compiler('fortran') }}  # [not win]
     - {{ compiler('c') }}
     - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
@@ -41,11 +47,13 @@ requirements:
     - numpy
     - pip
     - zlib
+    - llvm-openmp  # [win]
   run:
     - python
     - matplotlib-base
     - astropy-base
     - scipy
+    - llvm-openmp  # [win]
 
 test:
   source_files:
@@ -61,9 +69,9 @@ test:
     - requests
   commands:
     - pytest --doctest-plus --doctest-cython --pyargs healpy
-    # Use an expanded file list to avoid passing literal "test" in sys.argv, which
-    # triggers setup.py's guard that aborts when it sees "test" in argv.
-    - pytest test/*.py
+    # Use ./test (not bare "test") to avoid setup.py "test" argv guard while
+    # remaining shell-agnostic (Windows cmd does not expand globs like test/*.py).
+    - pytest ./test
 
 about:
   home: http://github.com/healpy
