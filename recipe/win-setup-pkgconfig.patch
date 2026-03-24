@@ -1,0 +1,33 @@
+diff --git a/setup.py b/setup.py
+index 638340b..5750691 100644
+--- a/setup.py
++++ b/setup.py
+@@ -75,10 +75,14 @@ class build_external_clib(build_clib):
+         env = self.env()
+         PKG_CONFIG = tuple(shlex.split(env["PKG_CONFIG"], posix=(os.sep == "/")))
+         kw = {}
++        if os.name == "nt":
++            library_keys = ("library_dirs",)
++        else:
++            library_keys = ("library_dirs", "runtime_library_dirs")
+         index_key_flag = (
+             (2, "--cflags-only-I", ("include_dirs",)),
+             (0, "--cflags-only-other", ("extra_compile_args", "extra_link_args")),
+-            (2, "--libs-only-L", ("library_dirs", "runtime_library_dirs")),
++            (2, "--libs-only-L", library_keys),
+             (2, "--libs-only-l", ("libraries",)),
+             (0, "--libs-only-other", ("extra_link_args",)),
+         )
+@@ -88,6 +92,12 @@ class build_external_clib(build_clib):
+             args = [
+                 token[index:].decode() for token in check_output(cmd, env=env).split()
+             ]
++            if os.name == "nt" and flag == "--libs-only-l":
++                args = [arg for arg in args if arg != "m"]
++                if "libomp" not in args:
++                    args.append("libomp")
++                if "clang_rt.builtins-x86_64" not in args:
++                    args.append("clang_rt.builtins-x86_64")
+             if args:
+                 for key in keys:
+                     kw.setdefault(key, []).extend(args)
