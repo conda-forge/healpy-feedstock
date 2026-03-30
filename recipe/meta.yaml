@@ -17,7 +17,7 @@ source:
     - win-pixelweights-test.patch
 
 build:
-  number: 1
+  number: 2
   skip: true  # [py<310]
 
 requirements:
@@ -34,7 +34,7 @@ requirements:
     - autotools_clang_conda  # [win]
     - compiler-rt  # [win]
     - llvm-openmp  # [win]
-    - {{ compiler('fortran') }}  # [not win]
+    - {{ compiler("fortran") }}
     - {{ compiler('c') }}
     - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
