@@ -4,5 +4,3 @@ cxx_compiler:
   - vs2022  # [win]
 c_stdlib:
   - vs  # [win]
-ucrt:
-  - 10.0.20348.0  # [win]

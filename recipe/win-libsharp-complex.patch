@@ -1,0 +1,47 @@
+diff --git a/cextern/healpix/src/common_libraries/libsharp/libsharp/sharp_internal.h b/cextern/healpix/src/common_libraries/libsharp/libsharp/sharp_internal.h
+--- a/cextern/healpix/src/common_libraries/libsharp/libsharp/sharp_internal.h
++++ b/cextern/healpix/src/common_libraries/libsharp/libsharp/sharp_internal.h
+@@ -35,6 +35,42 @@
+ #include <complex.h>
+ #include "libsharp/sharp.h"
+ #include "libsharp/sharp_ylmgen_c.h"
+ 
++#ifdef _WIN32
++/*
++ * On Windows with clang-cl targeting the MSVC UCRT, <complex.h> pulls in
++ * corecrt_math.h which contains:
++ *
++ *     #define complex _complex
++ *
++ * This rewrites every `complex double` declaration into the nonsensical
++ * `_complex double`, breaking the build. UCRT also provides creal/cimag as
++ * functions taking the struct types _Dcomplex/_Fcomplex, which are
++ * incompatible with libsharp's `_Complex double` typedefs.
++ *
++ * Restore C99 complex support by undefining the broken macro, aliasing
++ * `complex` back to the clang built-in `_Complex` type specifier, and
++ * providing creal/cimag/crealf/cimagf as inline wrappers that operate on
++ * `_Complex` values via the `__real__`/`__imag__` operator extensions.
++ */
++#undef complex
++#define complex _Complex
++
++#undef creal
++#undef cimag
++#undef crealf
++#undef cimagf
++
++static inline double sharp_creal(double _Complex z) { return __real__ z; }
++static inline double sharp_cimag(double _Complex z) { return __imag__ z; }
++static inline float  sharp_crealf(float _Complex z) { return __real__ z; }
++static inline float  sharp_cimagf(float _Complex z) { return __imag__ z; }
++
++#define creal  sharp_creal
++#define cimag  sharp_cimag
++#define crealf sharp_crealf
++#define cimagf sharp_cimagf
++#endif
++
+ typedef struct
+   {
+   sharp_jobtype type;
