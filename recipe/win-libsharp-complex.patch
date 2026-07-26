@@ -1,8 +1,6 @@
-diff --git a/cextern/healpix/src/common_libraries/libsharp/libsharp/sharp_internal.h b/cextern/healpix/src/common_libraries/libsharp/libsharp/sharp_internal.h
---- a/cextern/healpix/src/common_libraries/libsharp/libsharp/sharp_internal.h
-+++ b/cextern/healpix/src/common_libraries/libsharp/libsharp/sharp_internal.h
-@@ -35,6 +35,42 @@
- #include <complex.h>
+--- a/cextern/healpix/src/common_libraries/libsharp/libsharp/sharp_internal.h	2026-07-25 20:25:56.592064969 -0700
++++ b/cextern/healpix/src/common_libraries/libsharp/libsharp/sharp_internal.h	2026-07-25 20:25:56.896073477 -0700
+@@ -36,6 +36,47 @@
  #include "libsharp/sharp.h"
  #include "libsharp/sharp_ylmgen_c.h"
  
@@ -15,16 +13,21 @@ diff --git a/cextern/healpix/src/common_libraries/libsharp/libsharp/sharp_intern
 + *
 + * This rewrites every `complex double` declaration into the nonsensical
 + * `_complex double`, breaking the build. UCRT also provides creal/cimag as
-+ * functions taking the struct types _Dcomplex/_Fcomplex, which are
-+ * incompatible with libsharp's `_Complex double` typedefs.
++ * functions taking the struct types _Dcomplex/_Fcomplex, and defines
++ * _Complex_I as a _Fcomplex struct, which has no arithmetic operators with
++ * double, breaking expressions like `cos(x) + _Complex_I*sin(x)`.
 + *
 + * Restore C99 complex support by undefining the broken macro, aliasing
-+ * `complex` back to the clang built-in `_Complex` type specifier, and
-+ * providing creal/cimag/crealf/cimagf as inline wrappers that operate on
-+ * `_Complex` values via the `__real__`/`__imag__` operator extensions.
++ * `complex` back to the clang built-in `_Complex` type specifier, redefining
++ * _Complex_I as clang's native _Complex imaginary unit, and providing
++ * creal/cimag/crealf/cimagf as inline wrappers that operate on `_Complex`
++ * values via the `__real__`/`__imag__` operator extensions.
 + */
 +#undef complex
 +#define complex _Complex
++
++#undef _Complex_I
++#define _Complex_I (1.0iF)
 +
 +#undef creal
 +#undef cimag
