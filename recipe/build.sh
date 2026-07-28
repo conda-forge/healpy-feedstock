@@ -1,6 +1,11 @@
 #!/bin/bash
 set -ex
 
+# MSYS preserves environment-variable casing, so conda-build may expose this
+# only as TARGET_PLATFORM.
+target_platform="${target_platform:-${TARGET_PLATFORM:-}}"
+export target_platform
+
 pkg_config_libs() {
     local pkg="$1"
     local libs=""

@@ -13,6 +13,8 @@ source:
     - macos-c++-linking.patch    # [osx]
     - cross-rpath-flag-workaround.patch  # [aarch64]
     - win-setup-pkgconfig.patch  # [win]
+    - win-moduledef-slots.patch  # [win]
+    - win-harmonic-weights-path.patch  # [win]
 
 build:
   number: 0
