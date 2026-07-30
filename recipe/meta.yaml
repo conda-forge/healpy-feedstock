@@ -1,6 +1,6 @@
 {% set name = "healpy" %}
-{% set version = "1.19.0" %}
-{% set sha256 = "28e839cb885a23d36c77fc3423a3cb9271a07fda94085bd12fc329f941130ec5" %}
+{% set version = "1.20.0" %}
+{% set sha256 = "03b0e1551ae235c7290e9bfdf69fa9cdc194f8a2be51198c1924b15d826102ed" %}
 
 package:
   name: {{ name|lower }}
@@ -13,11 +13,11 @@ source:
     - macos-c++-linking.patch    # [osx]
     - cross-rpath-flag-workaround.patch  # [aarch64]
     - win-setup-pkgconfig.patch  # [win]
-    - win-pixel-lib-int64.patch  # [win]
-    - win-pixelweights-test.patch
+    - win-moduledef-slots.patch  # [win]
+    - win-harmonic-weights-path.patch  # [win]
 
 build:
-  number: 3
+  number: 0
   skip: true  # [py<310]
 
 requirements:
@@ -66,7 +66,6 @@ test:
     - pytest
     - pytest-cython
     - pytest-doctestplus
-    - requests
   commands:
     - pytest --doctest-plus --doctest-cython --pyargs healpy
     # Use ./test (not bare "test") to avoid setup.py "test" argv guard while
