@@ -7,7 +7,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://files.pythonhosted.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
   patches:
     - macos-c++-linking.patch    # [osx]
@@ -17,7 +17,7 @@ source:
     - win-harmonic-weights-path.patch  # [win]
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py<310]
 
 requirements:
