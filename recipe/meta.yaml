@@ -17,7 +17,7 @@ source:
     - win-harmonic-weights-path.patch  # [win]
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py<310]
 
 requirements:
